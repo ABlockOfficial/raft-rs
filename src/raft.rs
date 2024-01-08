@@ -656,7 +656,7 @@ impl<T: Storage> RaftCore<T> {
         if m.get_msg_type() == MessageType::MsgRequestVote
             || m.get_msg_type() == MessageType::MsgRequestPreVote
         {
-            m.priority = self.priority;
+            m.priority = self.priority as i64;
         }
         msgs.push(m);
     }
@@ -1434,7 +1434,7 @@ impl<T: Storage> Raft<T> {
                 // ...and we believe the candidate is up to date.
                 if can_vote
                     && self.raft_log.is_up_to_date(m.index, m.log_term)
-                    && (m.index > self.raft_log.last_index() || self.priority <= m.priority)
+                    && (m.index > self.raft_log.last_index() || self.priority <= m.priority as u64)
                 {
                     // When responding to Msg{Pre,}Vote messages we include the term
                     // from the message, not the local term. To see why consider the

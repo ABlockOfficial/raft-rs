@@ -19,7 +19,7 @@ prost-codec = ["raft/prost-codec"]
 # Make sure to synchronize updates with Raft.
 [dependencies]
 raft = { path = "..", default-features = false }
-raft-proto = { path = "../proto", default-features = false }
+raft-proto = { version = "0.7.0", default-features = false }
 rand = "0.8"
 slog = "2.2"
 
